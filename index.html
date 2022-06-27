@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audaz</title>
+</head>
+<body>
+    
+    <script>
+        // Uma "Fare" só pode ser cadastrada caso aquela operadora não possua nenhuma 
+        // tarifa ativa (Fare.Status == 1) de mesmo valor dentro de um período de 6 meses. 
+
+        // Operator é a operadora do benefício do vale-transporte
+        class Operator {
+            constructor(nome, tempo, status){
+                this.nome = nome;
+                this.tempo = tempo;
+                this.status = status;
+            }
+        }
+
+        let operadora1 = new Operator('Transporte +', 10, 1);
+        let operadora2 = new Operator('Transporte vida', 4, 0);
+        console.log( operadora1 );
+        console.log( operadora2 );
+
+        // Fare é a tarifa
+        class Fare extends Operator{
+            constructor(nome, tempo, status, valor){
+                super('operadora1', tempo, status);
+                this.valor = valor;
+            }
+
+            adicionarTarifa(valor){
+                if(this.tempo <= 6 ){
+                    console.log('não foi possível adiconar a tarifa')
+                } else {
+                    return this.valor += valor;
+                }
+            }
+
+            consultarTarifa(){
+                return this.valor;
+            }
+        }
+
+        let tarifa1 = new Fare('operadora10', 1, 0, 0);
+        tarifa1.adicionarTarifa(80)
+        console.log( tarifa1 )
+    </script>
+</body>
+</html>
